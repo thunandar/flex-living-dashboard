@@ -21,9 +21,6 @@ export interface NormalizedReview {
   overallRating: number;
   publicReview: string;
   categories: {
-    cleanliness: number;
-    communication: number;
-    respect_house_rules: number;
     [key: string]: number;
   };
   submittedAt: Date;

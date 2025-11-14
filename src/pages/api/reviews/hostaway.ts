@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { mockReviews, normalizeReviews } from '@/lib/data';
+import { mockReviews, normalizeReviews } from '@/src/lib/data';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {

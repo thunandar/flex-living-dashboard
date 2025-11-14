@@ -1,19 +1,25 @@
 import { useState, useEffect } from 'react';
-import { NormalizedReview } from '@/types';
+import { NormalizedReview } from '@/src/types';
 
 export default function PropertyPage() {
   const [approvedReviews, setApprovedReviews] = useState<NormalizedReview[]>([]);
 
   useEffect(() => {
-    // In a real app, you'd fetch only approved reviews
     fetch('/api/reviews/hostaway')
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
-          // Filter to show only selected/approved reviews
-          const approved = data.result.filter((review: any) => review.isSelected);
+          const approved = data.result
+            .filter((review: any) => review.isSelected)
+            .map((review: any) => ({
+              ...review,
+              submittedAt: new Date(review.submittedAt) 
+            }));
           setApprovedReviews(approved);
         }
+      })
+      .catch(error => {
+        console.error('Failed to fetch reviews:', error);
       });
   }, []);
 
@@ -77,7 +83,10 @@ export default function PropertyPage() {
                       <div className="flex items-center gap-2">
                         <span className="text-yellow-600">⭐ {review.overallRating}</span>
                         <span className="text-gray-500">
-                          {review.submittedAt.toLocaleDateString()}
+                          {/* Safe date formatting */}
+                          {review.submittedAt && review.submittedAt.toLocaleDateString 
+                            ? review.submittedAt.toLocaleDateString() 
+                            : new Date().toLocaleDateString()}
                         </span>
                       </div>
                     </div>

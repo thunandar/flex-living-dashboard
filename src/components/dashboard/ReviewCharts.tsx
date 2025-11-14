@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
-import { NormalizedReview } from '@/types';
+import { NormalizedReview } from '@/src/types';
 
 interface ReviewChartsProps {
   reviews: NormalizedReview[];

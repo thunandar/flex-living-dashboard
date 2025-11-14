@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { NormalizedReview } from '@/types';
+import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
+import { NormalizedReview } from '@/src/types';
 
 interface ReviewsTableProps {
   reviews: NormalizedReview[];

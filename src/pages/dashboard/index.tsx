@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Sidebar } from '@/components/dashboard/Sidebar';
-import { StatsCards } from '@/components/dashboard/StatsCards';
-import { ReviewCharts } from '@/components/dashboard/ReviewCharts';
-import { ReviewsTable } from '@/components/dashboard/ReviewsTable';
-import { NormalizedReview } from '@/types';
+import { Sidebar } from '@/src/components/dashboard/Sidebar';
+import { StatsCards } from '@/src/components/dashboard/StatsCards';
+import { ReviewCharts } from '@/src/components/dashboard/ReviewCharts';
+import { ReviewsTable } from '@/src/components/dashboard/ReviewsTable';
+import { NormalizedReview } from '@/src/types';
 
 export default function Dashboard() {
   const [reviews, setReviews] = useState<NormalizedReview[]>([]);
