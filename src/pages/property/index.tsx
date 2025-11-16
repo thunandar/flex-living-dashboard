@@ -8,12 +8,13 @@ import TimeDisplay from '@/src/components/ui/TimeDisplay';
 import RuleItem from '@/src/components/ui/RuleItem';
 import Footer from '@/src/components/ui/Footer';
 import { propertyData, propertyImages } from '@/src/data/propertyData';
-import { Users, Bed, Bath, Home, Calendar, ChevronDown, MessageCircle, Tv, Wifi, Radio, UtensilsCrossed, WashingMachine, Building2, Clock, Thermometer, Droplets, Building, Info, FileText, Mail, Globe, PoundSterling, Shield, Ban, Circle, Sparkles, CheckCircle } from 'lucide-react';
+import { Users, Bed, Bath, Home, Calendar, ChevronDown, MessageCircle, Tv, Wifi, Radio, UtensilsCrossed, WashingMachine, Building2, Clock, Thermometer, Droplets, Building, Info, FileText, Mail, Globe, PoundSterling, Shield, Ban, Circle, Sparkles, CheckCircle, Menu, X } from 'lucide-react';
 
 export default function PropertyPage() {
   const [allReviews, setAllReviews] = useState<NormalizedReview[]>([]);
   const [approvedReviews, setApprovedReviews] = useState<NormalizedReview[]>([]);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     fetch('/api/reviews/hostaway')
@@ -63,36 +64,81 @@ export default function PropertyPage() {
                 className="h-8 w-auto"
               />
             </div>
-            <div className="flex items-center gap-12">
-              <nav className={`flex items-center gap-20 text-base font-semibold transition-colors duration-300 ${isScrolled ? 'text-white' : 'text-gray-900'}`}>
-                <a href="#" className="hover:opacity-80 flex items-center gap-1.5">
-                  <Building className={`w-4 h-4 ${isScrolled ? 'text-white' : 'text-gray-900'}`} />
+            {/* Desktop Navigation */}
+            <nav className={`hidden lg:flex items-center gap-20 text-base font-semibold transition-colors duration-300 ${isScrolled ? 'text-white' : 'text-gray-900'}`}>
+              <a href="#" className="hover:opacity-80 flex items-center gap-1.5">
+                <Building className={`w-4 h-4 ${isScrolled ? 'text-white' : 'text-gray-900'}`} />
+                Landlords
+                <ChevronDown className={`w-3 h-3 ${isScrolled ? 'text-white' : 'text-gray-900'}`} />
+              </a>
+              <a href="#" className="hover:opacity-80 flex items-center gap-1.5">
+                <Info className={`w-4 h-4 ${isScrolled ? 'text-white' : 'text-gray-900'}`} />
+                About Us
+              </a>
+              <a href="#" className="hover:opacity-80 flex items-center gap-1.5">
+                <FileText className={`w-4 h-4 ${isScrolled ? 'text-white' : 'text-gray-900'}`} />
+                Careers
+              </a>
+              <a href="#" className="hover:opacity-80 flex items-center gap-1.5">
+                <Mail className={`w-4 h-4 ${isScrolled ? 'text-white' : 'text-gray-900'}`} />
+                Contact
+              </a>
+              <a href="#" className="hover:opacity-80 flex items-center gap-1.5">
+                <Globe className={`w-4 h-4 ${isScrolled ? 'text-white' : 'text-gray-900'}`} />
+                GB English
+              </a>
+              <a href="#" className="hover:opacity-80 flex items-center gap-1.5">
+                <PoundSterling className={`w-4 h-4 ${isScrolled ? 'text-white' : 'text-gray-900'}`} />
+                 GBP
+              </a>
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className={`lg:hidden ${isScrolled ? 'text-white' : 'text-gray-900'}`}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
+          </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className={`lg:hidden mt-4 pb-4 border-t ${isScrolled ? 'border-white/20' : 'border-gray-200'}`}>
+              <nav className="flex flex-col gap-4 pt-4">
+                <a href="#" className={`hover:opacity-80 flex items-center gap-2 ${isScrolled ? 'text-white' : 'text-gray-900'}`}>
+                  <Building className="w-4 h-4" />
                   Landlords
-                  <ChevronDown className={`w-3 h-3 ${isScrolled ? 'text-white' : 'text-gray-900'}`} />
+                  <ChevronDown className="w-3 h-3" />
                 </a>
-                <a href="#" className="hover:opacity-80 flex items-center gap-1.5">
-                  <Info className={`w-4 h-4 ${isScrolled ? 'text-white' : 'text-gray-900'}`} />
+                <a href="#" className={`hover:opacity-80 flex items-center gap-2 ${isScrolled ? 'text-white' : 'text-gray-900'}`}>
+                  <Info className="w-4 h-4" />
                   About Us
                 </a>
-                <a href="#" className="hover:opacity-80 flex items-center gap-1.5">
-                  <FileText className={`w-4 h-4 ${isScrolled ? 'text-white' : 'text-gray-900'}`} />
+                <a href="#" className={`hover:opacity-80 flex items-center gap-2 ${isScrolled ? 'text-white' : 'text-gray-900'}`}>
+                  <FileText className="w-4 h-4" />
                   Careers
                 </a>
-                <a href="#" className="hover:opacity-80 flex items-center gap-1.5">
-                  <Mail className={`w-4 h-4 ${isScrolled ? 'text-white' : 'text-gray-900'}`} />
+                <a href="#" className={`hover:opacity-80 flex items-center gap-2 ${isScrolled ? 'text-white' : 'text-gray-900'}`}>
+                  <Mail className="w-4 h-4" />
                   Contact
                 </a>
-                <a href="#" className="hover:opacity-80 flex items-center gap-1.5">
-                  <Globe className={`w-4 h-4 ${isScrolled ? 'text-white' : 'text-gray-900'}`} />
+                <a href="#" className={`hover:opacity-80 flex items-center gap-2 ${isScrolled ? 'text-white' : 'text-gray-900'}`}>
+                  <Globe className="w-4 h-4" />
                   GB English
                 </a>
-                <a href="#" className="hover:opacity-80 flex items-center gap-1.5">
-                  <PoundSterling className={`w-4 h-4 ${isScrolled ? 'text-white' : 'text-gray-900'}`} />
-                   GBP
+                <a href="#" className={`hover:opacity-80 flex items-center gap-2 ${isScrolled ? 'text-white' : 'text-gray-900'}`}>
+                  <PoundSterling className="w-4 h-4" />
+                  GBP
                 </a>
               </nav>
             </div>
-          </div>
+          )}
         </div>
       </header>
 

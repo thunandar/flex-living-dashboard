@@ -30,13 +30,13 @@ export default function Footer() {
                 placeholder="Email address"
               />
               <div className="flex gap-3">
-                <FormSelect className="w-24">
+                <select className="bg-white/10 border border-white/20 text-white px-3 py-2 rounded-lg text-sm outline-none focus:ring-2 focus:ring-white/30 transition-colors w-24 flex-shrink-0">
                   <option className="text-gray-900">GB +44</option>
-                </FormSelect>
-                <FormInput
+                </select>
+                <input
                   type="tel"
                   placeholder="Phone number"
-                  className="flex-1"
+                  className="bg-white/10 border border-white/20 text-white placeholder:text-gray-400 px-4 py-2 rounded-lg text-sm outline-none focus:ring-2 focus:ring-white/30 transition-colors flex-1"
                 />
               </div>
               <Button variant="white" icon={Send} className="w-full">
