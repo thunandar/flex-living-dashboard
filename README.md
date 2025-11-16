@@ -13,7 +13,7 @@ The application is successfully deployed and accessible at:
 
 ## 🚀 Overview
 
-This project implements a comprehensive Reviews Dashboard that helps property managers monitor guest feedback, analyze performance metrics, and curate reviews for public display.
+This project implements a comprehensive Reviews Dashboard that helps property managers monitor guest feedback, analyze performance metrics, and curate reviews for public display. The property page replicates the Flex Living website design with pixel-perfect accuracy.
 
 ## ✨ Features
 
@@ -24,10 +24,29 @@ This project implements a comprehensive Reviews Dashboard that helps property ma
 - **Advanced Filtering**: Filter by property, channel, category, rating, and date range
 - **Recurring Issues Detection**: Automatically identify patterns needing attention
 - **Real-time Metrics**: Key performance indicators at a glance
+- **Sorting Options**: Sort by newest, oldest, highest, or lowest ratings
 
-### Public Property Page
-- **Professional Display**: Clean, modern layout for showcasing approved reviews
-- **Guest-Centric Design**: Focus on building trust with potential guests
+### Public Property Page (Flex Living Design Replication)
+- **Complete UI Replication**: Pixel-perfect match of Flex Living property page design
+- **Dynamic Header**: White background that transitions to brand green on scroll
+- **Smart Logo Switching**: Green logo when header is white, white logo when scrolled
+- **Property Image Gallery**: Responsive grid layout with main image and thumbnails
+- **Property Details**: Guests, bedrooms, bathrooms, and beds with icons
+- **About Section**: Expandable description with "Read more/less" functionality
+- **Amenities Grid**: Comprehensive list with icons for all property amenities
+- **Stay Policies**: 
+  - Check-in & Check-out times
+  - House rules with visual icons
+  - Cancellation policy by stay duration
+- **Location Section**: Embedded Google Maps with location link
+- **Guest Reviews Section**: Displays only approved reviews from dashboard
+- **Sticky Booking Widget**: 
+  - Header section with brand colors
+  - Side-by-side date and guest inputs
+  - Check availability and Send Inquiry buttons
+  - Instant booking confirmation indicator
+- **Footer**: Complete footer with newsletter signup, company info, links, and contact details
+- **WhatsApp FAB**: Fixed floating action button for customer support
 - **Persistent Selections**: Approved reviews remain visible after page refresh
 
 ## 🛠 Tech Stack
@@ -43,6 +62,7 @@ This project implements a comprehensive Reviews Dashboard that helps property ma
 
 ### Hostaway Reviews API
 - **Endpoint**: `GET /api/reviews/hostaway`
+- **Account ID**: `61148`
 - **Implementation**: Attempts real Hostaway API call with provided credentials
 - **Sandbox Handling**: Falls back to mock data when API returns empty (expected in sandbox environment)
 - **Response**: Normalized review data with consistent structure and data source metadata
@@ -55,6 +75,7 @@ The API route follows this intelligent flow:
 2. **Handles Sandbox Environment**: When API returns empty results (expected), uses mock data
 3. **Normalizes Data**: Transforms both API and mock data into consistent format
 4. **Provides Metadata**: Response includes `dataSource` field indicating data origin
+5. **Filter Support**: Query parameters for `listing`, `channel`, `rating`, `startDate`, `endDate`, `type`, and `category`
 
 ### Example API Response
 
@@ -67,6 +88,15 @@ The API route follows this intelligent flow:
   "dataSource": "mock",
   "message": "Using mock data (Hostaway API unavailable or returned no reviews)"
 }
+```
+
+### Environment Variables
+
+Create a `.env.local` file with:
+
+```env
+HOSTAWAY_API_KEY=your_api_key_here
+HOSTAWAY_ACCOUNT_ID=61148
 ```
 
 ## 🏃‍♂️ Getting Started
@@ -88,12 +118,18 @@ The API route follows this intelligent flow:
    npm install
    ```
 
-3. Run the development server
+3. Set up environment variables (optional for local development)
+   ```bash
+   cp .env.example .env.local
+   # Edit .env.local with your Hostaway API credentials
+   ```
+
+4. Run the development server
    ```bash
    npm run dev
    ```
 
-4. Open your browser
+5. Open your browser
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ### Available Scripts
@@ -101,6 +137,15 @@ The API route follows this intelligent flow:
 - `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
+
+### Local Setup Instructions
+
+The application works out of the box with mock data. For Hostaway API integration:
+
+1. Add your API credentials to `.env.local`
+2. The API will automatically attempt to fetch real data
+3. If the API is unavailable or returns empty (sandbox), it falls back to mock data
+4. All features work identically with both data sources
 
 ## 📁 Project Structure
 

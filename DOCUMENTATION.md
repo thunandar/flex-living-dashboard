@@ -3,16 +3,18 @@
 ## 1. Tech Stack Used
 
 ### Frontend
-- **Next.js 16.0.3** - Full-stack React framework with App Router
+- **Next.js 16.0.3** - Full-stack React framework with Pages Router
+- **React 19.2.0** - UI library
 - **TypeScript** - Type safety and developer experience
-- **Tailwind CSS** - Utility-first CSS framework
-- **Recharts** - Data visualization library
-- **Lucide React** - Icon library
+- **Tailwind CSS** - Utility-first CSS framework with custom brand colors
+- **Recharts** - Data visualization library for dashboard charts
+- **Lucide React** - Comprehensive icon library
 
 ### Backend & Deployment
 - **Next.js API Routes** - Serverless backend endpoints
 - **localStorage** - Client-side persistence for review selections
 - **Vercel** - Deployment platform with CI/CD
+- **Environment Variables** - Secure API credential management
 
 ## 2. Key Design and Logic Decisions
 
@@ -31,6 +33,10 @@
 - **Progressive Disclosure**: Advanced filters hidden behind clean default view
 - **Visual Hierarchy**: Clear distinction between metrics, charts, and individual reviews
 - **Responsive Design**: Mobile-friendly interface for on-the-go management
+- **Property Page Replication**: Pixel-perfect match of Flex Living website design
+- **Dynamic Header**: Scroll-based color transition for better UX
+- **Component Reusability**: Modular UI components for consistency
+- **Brand Consistency**: Custom color system matching Flex Living brand guidelines
 
 ## 3. API Behaviors
 
@@ -79,7 +85,51 @@ All API responses follow this consistent format:
 }
 ```
 
-## 4. Google Reviews Findings
+## 4. Property Page Design Replication
+
+### Flex Living Website Replication
+
+The property page (`/property`) is a complete replication of the Flex Living website property details page with the following features:
+
+**Header:**
+- Dynamic background: White initially, transitions to brand green (`#284e4c`) on scroll
+- Logo switching: Green logo when header is white, white logo when scrolled
+- Navigation menu with icons: Landlords, About Us, Careers, Contact, Language, Currency
+- Smooth transitions and hover effects
+
+**Property Content:**
+- Image gallery: Responsive grid with main image and thumbnail grid
+- Property details: Guests, bedrooms, bathrooms, beds with icons
+- About section: Expandable text with "Read more/less" functionality
+- Amenities: Grid layout with icons for all property features
+- Stay Policies: 
+  - Check-in & Check-out times in side-by-side layout
+  - House rules with visual icons
+  - Cancellation policy organized by stay duration
+- Location: Embedded Google Maps with styled location link
+- Guest Reviews: Dedicated section showing only approved reviews
+
+**Booking Widget:**
+- Sticky positioning: Stays visible while scrolling
+- Header section: Brand-colored header with title and subtitle
+- Input fields: Side-by-side date and guest selection with icons
+- Action buttons: Check availability (disabled) and Send Inquiry
+- Confirmation indicator: Checkmark icon with instant booking message
+
+**Footer:**
+- Newsletter signup: Form with first name, last name, email, and phone
+- Company information: The Flex description and social links
+- Quick Links: Blog, Careers, Terms & Conditions, Privacy Policy
+- Locations: London, Paris, Algiers
+- Contact Us: Phone numbers for UK, Algeria, France, and email
+- Copyright notice
+
+**Additional Features:**
+- WhatsApp FAB: Fixed floating action button for customer support
+- Responsive design: Works seamlessly across all device sizes
+- Brand colors: Custom Tailwind colors matching Flex Living brand
+
+## 5. Google Reviews Findings
 
 ### Technical Investigation
 
@@ -104,7 +154,7 @@ After exploring Google Places API integration:
 
 For the MVP, focus on Hostaway integration as the primary review source. Google Reviews integration should be considered as a phase 2 feature once the platform gains traction and budget allocation.
 
-## 5. Problem-Solving Initiatives
+## 6. Problem-Solving Initiatives
 
 ### Undefined Requirements Addressed
 
@@ -128,7 +178,7 @@ For the MVP, focus on Hostaway integration as the primary review source. Google 
 - **State Synchronization**: Real-time updates between dashboard and property views
 - **Error Resilience**: Graceful degradation when external APIs unavailable
 
-## 6. Evaluation Criteria Alignment
+## 7. Evaluation Criteria Alignment
 
 ### Code Clarity & Structure
 - Consistent naming conventions and folder structure

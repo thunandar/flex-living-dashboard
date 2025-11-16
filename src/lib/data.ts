@@ -58,7 +58,7 @@ export function normalizeReviews(reviews: Review[]): NormalizedReview[] {
       guestName: review.guestName,
       listingName: review.listingName,
       channel: review.channel || 'Hostaway',
-      isSelected: Math.random() > 0.3
+      isSelected: false
     };
   });
 }
