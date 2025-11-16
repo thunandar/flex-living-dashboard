@@ -39,13 +39,13 @@ export function ReviewCharts({ reviews }: ReviewChartsProps) {
   });
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
       <Card>
-        <CardHeader>
-          <CardTitle>Rating Trend</CardTitle>
+        <CardHeader className="p-4 lg:p-6">
+          <CardTitle className="text-sm lg:text-base">Rating Trend</CardTitle>
         </CardHeader>
-        <CardContent>
-          <ResponsiveContainer width="100%" height={300}>
+        <CardContent className="p-4 lg:p-6 pt-0">
+          <ResponsiveContainer width="100%" height={250}>
             <LineChart data={monthlyData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" />
@@ -58,11 +58,11 @@ export function ReviewCharts({ reviews }: ReviewChartsProps) {
       </Card>
 
       <Card>
-        <CardHeader>
-          <CardTitle>Category Performance</CardTitle>
+        <CardHeader className="p-4 lg:p-6">
+          <CardTitle className="text-sm lg:text-base">Category Performance</CardTitle>
         </CardHeader>
-        <CardContent>
-          <ResponsiveContainer width="100%" height={300}>
+        <CardContent className="p-4 lg:p-6 pt-0">
+          <ResponsiveContainer width="100%" height={250}>
             <BarChart data={categoryData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="category" angle={-45} textAnchor="end" height={80} />

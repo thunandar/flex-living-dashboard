@@ -10,15 +10,15 @@ export function RecurringIssues({ reviews }: RecurringIssuesProps) {
   const issues = analyzeRecurringIssues(reviews);
 
   return (
-    <Card className={`mb-8 ${issues.length === 0 ? 'border-flex/30 bg-flex/5' : 'border-yellow-200 bg-yellow-50'}`}>
-      <CardHeader>
-        <CardTitle className={`${issues.length === 0 ? 'text-flex' : 'text-yellow-800'} flex items-center gap-2`}>
+    <Card className={`mb-6 lg:mb-8 ${issues.length === 0 ? 'border-flex/30 bg-flex/5' : 'border-yellow-200 bg-yellow-50'}`}>
+      <CardHeader className="p-4 lg:p-6">
+        <CardTitle className={`${issues.length === 0 ? 'text-flex' : 'text-yellow-800'} flex items-center gap-2 text-sm lg:text-base`}>
           {issues.length === 0 ? '✅ No Recurring Issues' : '⚠️ Recurring Issues Needing Attention'}
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-4 lg:p-6 pt-0">
         {issues.length === 0 ? (
-          <p className="text-flex/80">
+          <p className="text-flex/80 text-xs lg:text-sm leading-relaxed">
             Great news! No recurring issues detected. All category ratings are above the threshold (7/10) or issues haven't appeared frequently enough to be considered recurring.
           </p>
         ) : (

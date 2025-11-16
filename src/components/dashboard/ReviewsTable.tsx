@@ -96,11 +96,11 @@ export function ReviewsTable({ reviews, onToggleSelect }: ReviewsTableProps) {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Guest Reviews</CardTitle>
+      <CardHeader className="p-4 lg:p-6">
+        <CardTitle className="text-sm lg:text-base">Guest Reviews</CardTitle>
 
         {/* Filters Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 lg:gap-4 mt-4">
           {/* Approval Status Filter */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -247,7 +247,7 @@ export function ReviewsTable({ reviews, onToggleSelect }: ReviewsTableProps) {
         </div>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="p-4 lg:p-6 pt-0">
         <div className="space-y-4">
           {sortedReviews.length === 0 ? (
             <div className="text-center py-8 text-gray-500">
@@ -255,27 +255,27 @@ export function ReviewsTable({ reviews, onToggleSelect }: ReviewsTableProps) {
             </div>
           ) : (
             sortedReviews.map((review) => (
-              <div key={review.id} className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
+              <div key={review.id} className="border rounded-lg p-3 lg:p-4 hover:bg-gray-50 transition-colors">
+                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3">
+                  <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <span className="font-semibold text-gray-900">{review.guestName}</span>
-                      <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                      <span className="font-semibold text-sm lg:text-base text-gray-900">{review.guestName}</span>
+                      <span className="text-xs lg:text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
                         {review.listingName}
                       </span>
-                      <span className="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                      <span className="text-xs lg:text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">
                         {review.channel}
                       </span>
-                      <span className="text-sm text-gray-500">
+                      <span className="text-xs lg:text-sm text-gray-500">
                         {review.submittedAt.toLocaleDateString()}
                       </span>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-4 mb-2">
-                      <span className="text-lg font-bold text-yellow-600">
+                    <div className="flex flex-wrap items-center gap-3 lg:gap-4 mb-2">
+                      <span className="text-base lg:text-lg font-bold text-yellow-600">
                         ⭐ {review.overallRating}/5
                       </span>
-                      <div className="flex gap-4 text-sm">
+                      <div className="flex flex-wrap gap-2 lg:gap-4 text-xs lg:text-sm">
                         {Object.entries(review.categories).map(([category, rating]) => (
                           <span key={category} className="text-gray-600">
                             {category.replace('_', ' ')}: <strong>{rating}/10</strong>
@@ -284,12 +284,12 @@ export function ReviewsTable({ reviews, onToggleSelect }: ReviewsTableProps) {
                       </div>
                     </div>
 
-                    <p className="text-gray-700">{review.publicReview}</p>
+                    <p className="text-sm lg:text-base text-gray-700">{review.publicReview}</p>
                   </div>
 
                   <button
                     onClick={() => onToggleSelect(review.id)}
-                    className={`ml-4 px-4 py-2 rounded-lg border transition-colors ${review.isSelected
+                    className={`lg:ml-4 px-3 lg:px-4 py-2 rounded-lg border transition-colors text-sm lg:text-base whitespace-nowrap flex-shrink-0 ${review.isSelected
                         ? 'bg-flex/10 text-flex border-flex/30 hover:bg-flex/20'
                         : 'bg-gray-100 text-gray-800 border-gray-300 hover:bg-gray-200'
                       }`}
