@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/Card';
 import { NormalizedReview } from '@/src/types';
 
 interface RecurringIssuesProps {
@@ -9,32 +9,34 @@ export function RecurringIssues({ reviews }: RecurringIssuesProps) {
   // Analyze reviews for recurring issues
   const issues = analyzeRecurringIssues(reviews);
 
-  if (issues.length === 0) {
-    return null;
-  }
-
   return (
-    <Card className="mb-8 border-yellow-200 bg-yellow-50">
+    <Card className={`mb-8 ${issues.length === 0 ? 'border-green-200 bg-green-50' : 'border-yellow-200 bg-yellow-50'}`}>
       <CardHeader>
-        <CardTitle className="text-yellow-800 flex items-center gap-2">
-          ⚠️ Recurring Issues Needing Attention
+        <CardTitle className={`${issues.length === 0 ? 'text-green-800' : 'text-yellow-800'} flex items-center gap-2`}>
+          {issues.length === 0 ? '✅ No Recurring Issues' : '⚠️ Recurring Issues Needing Attention'}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-4">
-          {issues.map((issue, index) => (
-            <div key={index} className="border-l-4 border-yellow-400 pl-4 py-1">
-              <h4 className="font-semibold text-yellow-800">{issue.issue}</h4>
-              <p className="text-sm text-yellow-700">
-                Affected {issue.affectedProperties.length} propert
-                {issue.affectedProperties.length === 1 ? 'y' : 'ies'}: {issue.affectedProperties.join(', ')}
-              </p>
-              <p className="text-sm text-yellow-600">
-                Average rating: {issue.averageRating.toFixed(1)}/10
-              </p>
-            </div>
-          ))}
-        </div>
+        {issues.length === 0 ? (
+          <p className="text-green-700">
+            Great news! No recurring issues detected. All category ratings are above the threshold (7/10) or issues haven't appeared frequently enough to be considered recurring.
+          </p>
+        ) : (
+          <div className="space-y-4">
+            {issues.map((issue, index) => (
+              <div key={index} className="border-l-4 border-yellow-400 pl-4 py-1">
+                <h4 className="font-semibold text-yellow-800">{issue.issue}</h4>
+                <p className="text-sm text-yellow-700">
+                  Affected {issue.affectedProperties.length} propert
+                  {issue.affectedProperties.length === 1 ? 'y' : 'ies'}: {issue.affectedProperties.join(', ')}
+                </p>
+                <p className="text-sm text-yellow-600">
+                  Average rating: {issue.averageRating.toFixed(1)}/10
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
       </CardContent>
     </Card>
   );

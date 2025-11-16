@@ -70,7 +70,7 @@ export default function Dashboard() {
           </div>
 
           <StatsCards reviews={reviews} />
-          <RecurringIssues reviews={reviews} />
+          <RecurringIssues reviews={reviews} /> 
           <ReviewCharts reviews={reviews} />
           <ReviewsTable 
             reviews={reviews} 
