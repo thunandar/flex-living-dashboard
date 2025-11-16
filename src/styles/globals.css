@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Flex Living Brand Colors */
+:root {
+  --flex-primary: rgb(40, 78, 76);
+  --flex-primary-dark: rgb(30, 60, 58);
+  --flex-primary-light: rgb(50, 96, 94);
+}
+
 /* Optional: custom global styles */
 body {
   @apply bg-gray-50;

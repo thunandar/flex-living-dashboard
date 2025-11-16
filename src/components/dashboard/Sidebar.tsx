@@ -11,7 +11,7 @@ export function Sidebar() {
       <nav className="mt-6">
         <Link 
           href="/dashboard" 
-          className="block py-3 px-6 bg-blue-50 text-blue-600 border-r-4 border-blue-600"
+          className="block py-3 px-6 bg-flex/10 text-flex border-r-4 border-flex"
         >
           📊 Dashboard
         </Link>

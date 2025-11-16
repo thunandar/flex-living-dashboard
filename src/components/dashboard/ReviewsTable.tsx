@@ -290,7 +290,7 @@ export function ReviewsTable({ reviews, onToggleSelect }: ReviewsTableProps) {
                   <button
                     onClick={() => onToggleSelect(review.id)}
                     className={`ml-4 px-4 py-2 rounded-lg border transition-colors ${review.isSelected
-                        ? 'bg-green-100 text-green-800 border-green-300 hover:bg-green-200'
+                        ? 'bg-flex/10 text-flex border-flex/30 hover:bg-flex/20'
                         : 'bg-gray-100 text-gray-800 border-gray-300 hover:bg-gray-200'
                       }`}
                   >
