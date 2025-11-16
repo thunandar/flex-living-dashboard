@@ -37,7 +37,7 @@ export const mockReviews: Review[] = [
 
 export function normalizeReviews(reviews: Review[]): NormalizedReview[] {
   return reviews.map(review => {
-    // Fix the categories type issue
+
     const categories: { [key: string]: number } = {};
     review.reviewCategory.forEach(category => {
       categories[category.category] = category.rating;

@@ -4,6 +4,8 @@ import { StatsCards } from '@/src/components/dashboard/StatsCards';
 import { ReviewCharts } from '@/src/components/dashboard/ReviewCharts';
 import { ReviewsTable } from '@/src/components/dashboard/ReviewsTable';
 import { NormalizedReview } from '@/src/types';
+import { getSelectedReviewIds, toggleReviewSelection } from '@/src/lib/storage';
+import { RecurringIssues } from '@/src/components/dashboard/RecurringIssues';
 
 export default function Dashboard() {
   const [reviews, setReviews] = useState<NormalizedReview[]>([]);
@@ -18,10 +20,16 @@ export default function Dashboard() {
       const response = await fetch('/api/reviews/hostaway');
       const data = await response.json();
       if (data.status === 'success') {
-        setReviews(data.result.map((review: any) => ({
+        const selectedReviewIds = getSelectedReviewIds();
+        
+        // Merge API data with persisted selections
+        const reviewsWithSelection = data.result.map((review: any) => ({
           ...review,
-          submittedAt: new Date(review.submittedAt)
-        })));
+          submittedAt: new Date(review.submittedAt),
+          isSelected: selectedReviewIds.includes(review.id)
+        }));
+        
+        setReviews(reviewsWithSelection);
       }
     } catch (error) {
       console.error('Failed to fetch reviews:', error);
@@ -31,6 +39,10 @@ export default function Dashboard() {
   };
 
   const handleToggleSelect = (reviewId: number) => {
+    // Update localStorage
+    const updatedSelection = toggleReviewSelection(reviewId);
+    
+    // Update local state
     setReviews(prev => prev.map(review => 
       review.id === reviewId 
         ? { ...review, isSelected: !review.isSelected }
@@ -58,6 +70,7 @@ export default function Dashboard() {
           </div>
 
           <StatsCards reviews={reviews} />
+          <RecurringIssues reviews={reviews} />
           <ReviewCharts reviews={reviews} />
           <ReviewsTable 
             reviews={reviews} 

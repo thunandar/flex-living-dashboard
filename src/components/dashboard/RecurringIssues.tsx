@@ -1,0 +1,78 @@
+import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
+import { NormalizedReview } from '@/src/types';
+
+interface RecurringIssuesProps {
+  reviews: NormalizedReview[];
+}
+
+export function RecurringIssues({ reviews }: RecurringIssuesProps) {
+  // Analyze reviews for recurring issues
+  const issues = analyzeRecurringIssues(reviews);
+
+  if (issues.length === 0) {
+    return null;
+  }
+
+  return (
+    <Card className="mb-8 border-yellow-200 bg-yellow-50">
+      <CardHeader>
+        <CardTitle className="text-yellow-800 flex items-center gap-2">
+          ⚠️ Recurring Issues Needing Attention
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4">
+          {issues.map((issue, index) => (
+            <div key={index} className="border-l-4 border-yellow-400 pl-4 py-1">
+              <h4 className="font-semibold text-yellow-800">{issue.issue}</h4>
+              <p className="text-sm text-yellow-700">
+                Affected {issue.affectedProperties.length} propert
+                {issue.affectedProperties.length === 1 ? 'y' : 'ies'}: {issue.affectedProperties.join(', ')}
+              </p>
+              <p className="text-sm text-yellow-600">
+                Average rating: {issue.averageRating.toFixed(1)}/10
+              </p>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function analyzeRecurringIssues(reviews: NormalizedReview[]) {
+  const issues: Array<{
+    issue: string;
+    affectedProperties: string[];
+    averageRating: number;
+  }> = [];
+
+  // Analyze low-rated categories
+  const categoryThreshold = 7; // Consider ratings below 7 as problematic
+  const categoryIssues: { [key: string]: { properties: Set<string>; ratings: number[] } } = {};
+
+  reviews.forEach(review => {
+    Object.entries(review.categories).forEach(([category, rating]) => {
+      if (rating < categoryThreshold) {
+        if (!categoryIssues[category]) {
+          categoryIssues[category] = { properties: new Set(), ratings: [] };
+        }
+        categoryIssues[category].properties.add(review.listingName);
+        categoryIssues[category].ratings.push(rating);
+      }
+    });
+  });
+
+  // Convert to issue format
+  Object.entries(categoryIssues).forEach(([category, data]) => {
+    if (data.ratings.length >= 2) { // At least 2 occurrences to be "recurring"
+      issues.push({
+        issue: `Low ${category.replace('_', ' ')} ratings`,
+        affectedProperties: Array.from(data.properties),
+        averageRating: data.ratings.reduce((a, b) => a + b, 0) / data.ratings.length
+      });
+    }
+  });
+
+  return issues;
+}

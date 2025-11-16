@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { NormalizedReview } from '@/src/types';
+import { getSelectedReviewIds } from '@/src/lib/storage';
 
 export default function PropertyPage() {
+  const [allReviews, setAllReviews] = useState<NormalizedReview[]>([]);
   const [approvedReviews, setApprovedReviews] = useState<NormalizedReview[]>([]);
 
   useEffect(() => {
@@ -9,12 +11,17 @@ export default function PropertyPage() {
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
-          const approved = data.result
-            .filter((review: any) => review.isSelected)
-            .map((review: any) => ({
-              ...review,
-              submittedAt: new Date(review.submittedAt) 
-            }));
+          const reviewsWithDates = data.result.map((review: any) => ({
+            ...review,
+            submittedAt: new Date(review.submittedAt)
+          }));
+          setAllReviews(reviewsWithDates);
+          
+          // Filter to show only approved reviews from localStorage
+          const selectedReviewIds = getSelectedReviewIds();
+          const approved = reviewsWithDates.filter((review: any) => 
+            selectedReviewIds.includes(review.id)
+          );
           setApprovedReviews(approved);
         }
       })
