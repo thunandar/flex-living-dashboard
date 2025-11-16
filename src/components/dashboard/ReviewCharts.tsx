@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/Card';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import { NormalizedReview } from '@/src/types';
 

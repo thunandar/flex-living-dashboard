@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/Card';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { NormalizedReview } from '@/src/types';
 
 interface StatsCardsProps {
