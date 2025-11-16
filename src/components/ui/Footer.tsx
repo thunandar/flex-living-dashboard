@@ -6,8 +6,8 @@ import Button from './Button';
 export default function Footer() {
   return (
     <footer className="bg-flex text-white">
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
+      <div className="max-w-7xl mx-auto px-4 lg:px-6 py-8 lg:py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-8 mb-6 lg:mb-8">
           {/* Join The Flex - Newsletter */}
           <div className="lg:col-span-2">
             <h3 className="text-xl font-bold mb-4">Join The Flex</h3>

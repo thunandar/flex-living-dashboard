@@ -52,8 +52,8 @@ export default function PropertyPage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className={`sticky top-0 z-50 transition-colors duration-300 ${isScrolled ? 'bg-flex' : 'bg-white'}`}>
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between h-16">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 py-3 lg:py-4">
+          <div className="flex items-center justify-between h-14 lg:h-16">
             <div className="flex items-center">
               <img
                 src={isScrolled 
@@ -145,46 +145,68 @@ export default function PropertyPage() {
       {/* Property Content */}
       <main className="relative">
         {/* Image Gallery */}
-        <div className="grid grid-cols-4 grid-rows-2 gap-4 mb-12 h-full mt-12 max-w-7xl mx-auto px-6">
-          <div className="col-span-2 row-span-2">
-            <img
-              src={propertyImages[0]}
-              alt="Property main"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </div>
-          {propertyImages.slice(1).map((image, index) => (
-            <div key={index} className="col-span-1 row-span-1">
+        <div className="mb-8 lg:mb-12 mt-6 lg:mt-12 max-w-7xl mx-auto px-4 lg:px-6">
+          {/* Desktop Layout: Grid with main image and thumbnails */}
+          <div className="hidden md:grid md:grid-cols-4 md:grid-rows-2 gap-4">
+            <div className="md:col-span-2 md:row-span-2">
               <img
-                src={image}
-                alt="property image"
-              className="w-full h-full object-cover rounded-lg"
+                src={propertyImages[0]}
+                alt="Property main"
+                className="w-full h-full object-cover rounded-lg"
               />
             </div>
-          ))}
+            {propertyImages.slice(1).map((image, index) => (
+              <div key={index} className="md:col-span-1 md:row-span-1">
+                <img
+                  src={image}
+                  alt={`Property image ${index + 2}`}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Layout: Horizontal scroll */}
+          <div className="md:hidden">
+            <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
+              {propertyImages.map((image, index) => (
+                <div key={index} className="flex-shrink-0 w-[85vw] snap-center">
+                  <img
+                    src={image}
+                    alt={`Property image ${index + 1}`}
+                    className="w-full h-[60vh] object-cover rounded-lg"
+                  />
+                </div>
+              ))}
+            </div>
+            {/* Image counter */}
+            <div className="text-center mt-3 text-sm text-gray-600">
+              {propertyImages.length} photos
+            </div>
+          </div>
         </div>
 
         {/* Property Details Grid */}
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-8 lg:mb-12">
             {/* Main Content - Left Side */}
             <div className="lg:col-span-2">
               {/* Property Title */}
-              <div className="mb-6">
-                <h1 className="text-3xl font-bold mb-6 text-[#333333]">
+              <div className="mb-4 lg:mb-6">
+                <h1 className="text-2xl lg:text-3xl font-bold mb-4 lg:mb-6 text-[#333333]">
                   {propertyData.title}
                 </h1>
               </div>
               
               {/* Property Details */}
-              <div className="flex gap-8 mb-8 text-sm">
+              <div className="flex flex-wrap gap-4 lg:gap-8 mb-6 lg:mb-8 text-sm">
                 <div className="flex items-center gap-2">
                   <Users className="w-5 h-5 text-gray-700" />
                   <span className="text-sm font-medium text-gray-700">{propertyData.details.guests} Guests</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Home className="w-5 h-5 text-gray-700" />
-                  <span className="text-sm font-medium text-gray-700">Bedrooms</span>
+                  <span className="text-sm font-medium text-gray-700">{propertyData.details.bedrooms} Bedrooms</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Bath className="w-5 h-5 text-gray-700" />
@@ -203,7 +225,7 @@ export default function PropertyPage() {
 
               {/* Amenities */}
               <InfoSection title="Amenities" actionText="View all amenities >">
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {propertyData.amenities.map((amenity, index) => {
                     const iconMap: { [key: string]: React.ReactNode } = {
                       'Cable TV': <Tv className="w-5 h-5 text-gray-600" />,
@@ -231,7 +253,7 @@ export default function PropertyPage() {
                 <div className="space-y-4">
                   {/* Check-in & Check-out */}
                   <PolicyBox icon={Clock} title="Check-in & Check-out">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <TimeDisplay label="Check-in Time" time="3:00 PM" />
                       <TimeDisplay label="Check-out Time" time="10:00 AM" />
                     </div>
@@ -239,7 +261,7 @@ export default function PropertyPage() {
 
                   {/* House Rules */}
                   <PolicyBox icon={Shield} title="House Rules">
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <RuleItem icon={Ban} text="No smoking" />
                       <RuleItem icon={Circle} text="No pets" />
                       <RuleItem icon={Sparkles} text="No parties or events" />
@@ -346,7 +368,7 @@ export default function PropertyPage() {
 
             {/* Sticky Booking Box - Right Side */}
             <div className="relative">
-              <div className="sticky" style={{ top: '100px' }}>
+              <div className="lg:sticky" style={{ top: '100px' }}>
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden">
                   {/* Header Section */}
                   <div className="bg-flex px-6 py-4 text-white">
@@ -357,7 +379,7 @@ export default function PropertyPage() {
                   {/* Content Section */}
                   <div className="p-6">
                     {/* Input Fields - Side by Side */}
-                    <div className="grid grid-cols-2 gap-3 mb-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
                       {/* Date Input */}
                       <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-3">
                         <Calendar className="w-5 h-5 text-gray-600 flex-shrink-0" />
@@ -418,12 +440,13 @@ export default function PropertyPage() {
         href="https://wa.me/447723745646"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:bg-[#20BA5A] transition-colors"
+        className="fixed bottom-4 right-4 lg:bottom-6 lg:right-6 z-50 w-12 h-12 lg:w-14 lg:h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:bg-[#20BA5A] transition-colors"
         aria-label="Contact us on WhatsApp"
       >
         <svg
-          width="28"
-          height="28"
+          width="24"
+          height="24"
+          className="lg:w-7 lg:h-7"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

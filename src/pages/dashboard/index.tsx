@@ -62,11 +62,11 @@ export default function Dashboard() {
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar />
       
-      <main className="ml-64 flex-1 p-8">
+      <main className="lg:ml-64 flex-1 p-4 lg:p-8">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Reviews Dashboard</h1>
-            <p className="text-gray-600">Monitor and manage guest reviews across all properties</p>
+          <div className="mb-6 lg:mb-8">
+            <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">Reviews Dashboard</h1>
+            <p className="text-sm lg:text-base text-gray-600">Monitor and manage guest reviews across all properties</p>
           </div>
 
           <StatsCards reviews={reviews} />
